@@ -24,13 +24,16 @@ plugin-marketpalce/
 
 ## Usage
 
-### 1. Register the marketplace (local path)
+### 1. Register the marketplace
 
 In a Claude Code session:
 
 ```
-/plugin marketplace add /Users/seungjoonlee/git/plugin-marketpalce
+/plugin marketplace add git@github.com:dimz119/plugin-marketpalce.git
 ```
+
+> 로컬 개발 중이라면 절대 경로로도 추가할 수 있어요:
+> `/plugin marketplace add /Users/seungjoonlee/git/plugin-marketpalce`
 
 ### 2. Install the plugin
 
