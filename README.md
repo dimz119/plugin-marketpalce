@@ -16,9 +16,10 @@ plugin-marketpalce/
         │   └── hello.md          # /hello-world:hello slash command
         ├── agents/
         │   └── welcome-bot.md    # welcome-bot subagent
-        └── skills/
-            └── code-greeter/
-                └── SKILL.md      # code-greeter skill
+        ├── skills/
+        │   └── code-greeter/
+        │       └── SKILL.md      # code-greeter skill
+        └── .mcp.json             # MCP servers (PyPI-pinned via uvx)
 ```
 
 ## Usage
@@ -49,6 +50,35 @@ After installing, three things become available:
 
 - **Skill**: "apply code-greeter to add a header to src/index.ts"
   → Inserts or refreshes a standardized greeting comment block at the top of the file.
+
+- **MCP servers**: `time` and `fetch` (Python, distributed via PyPI)
+  → "현재 서울 시간 알려줘" / "https://example.com 페이지 내용 가져와".
+
+## MCP server version control (PyPI 예시)
+
+`plugins/hello-world/.mcp.json` 은 `uvx` 로 PyPI 패키지를 실행해서 MCP 서버를
+띄우는 방식입니다. **PyPI 패키지명에 `==<version>` 을 붙여서 버전을 고정**하면
+플러그인 사용자 환경마다 동일한 서버 버전이 실행되는 것을 보장할 수 있어요.
+
+```json
+{
+  "mcpServers": {
+    "time": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-time==0.6.2", "--local-timezone=Asia/Seoul"]
+    }
+  }
+}
+```
+
+- `uvx <pkg>` → 항상 최신 버전 (재현성 ❌)
+- `uvx <pkg>==1.2.3` → 버전 고정 (재현성 ✅, 강의/배포용 권장)
+- `uvx <pkg>@latest` → 매 실행마다 최신 확인 (느릴 수 있음)
+
+> 사전 준비: `brew install uv` (또는 `pipx install uv`).
+> npm 기반 MCP 서버라면 `command: "npx"`, `args: ["-y", "@scope/pkg@1.2.3"]`
+> 형태로 동일한 버전 고정 패턴을 적용할 수 있습니다.
 
 ## Marketplace management commands
 
