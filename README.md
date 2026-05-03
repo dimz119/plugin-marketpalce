@@ -54,8 +54,12 @@ After installing, three things become available:
 - **Skill**: "apply code-greeter to add a header to src/index.ts"
   → Inserts or refreshes a standardized greeting comment block at the top of the file.
 
-- **MCP servers**: `time` and `fetch` (Python, distributed via PyPI)
-  → "현재 서울 시간 알려줘" / "https://example.com 페이지 내용 가져와".
+- **MCP servers**: `time` (시간 조회/타임존 변환) 과 `fetch` (URL → 페이지 내용)
+  — Python 으로 작성되어 PyPI 로 배포된 서버를 `uvx` 로 실행합니다.
+  자연어로 "지금 서울 몇 시야?", "https://example.com 가져와서 요약해줘"
+  처럼 요청하면 Claude 가 알맞은 도구를 호출해요. 자세한 사용법, 트리거
+  문구, 흔한 실수, 사전 준비(`brew install uv`) 는
+  [`plugins/hello-world/README.md`](plugins/hello-world/README.md) 참고.
 
 ## MCP server version control (PyPI 예시)
 
